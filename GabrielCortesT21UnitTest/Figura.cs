@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Geometria
@@ -8,20 +10,23 @@ namespace Geometria
     {
         public const int CUADRADO = 0;
         public const int CIRCULO = CUADRADO+1;
-
+        public const int TRIANGULO = CIRCULO + 1;
+        public const int RECTANGULO = TRIANGULO + 1;
+        public const int PENTAGONO = RECTANGULO + 1;
+        public const int ROMBO = PENTAGONO + 1;
+        public const int ROMBOIDE = ROMBO + 1;
+        public const int TRAPECIO = ROMBOIDE + 1;
 
         public const int PRIMERO = CUADRADO;
-        public const int ULTIMO = 8;
+        public const int ULTIMO = TRAPECIO;
         public const int DEFAULT = ULTIMO+1;
 
         private int id;
 
 
         //Constructores
-        public Figura(int id=DEFAULT)
-        {
-            this.Id = id;
-        }
+        public Figura(int id=DEFAULT)=> Id = id;
+
 
 
         public int Id { 
@@ -35,7 +40,17 @@ namespace Geometria
             }
         }
         public string Nom => GetNameFigura(Id);
-
+        public IEnumerable<string> Args
+        {
+            get
+            {
+              
+                string nombreMetodo = $"Area{Nom}";
+                MethodInfo method= typeof(Figura).GetMethod(nombreMetodo, BindingFlags.Static | BindingFlags.Public);
+                return method.GetParameters().Select(p=>p.Name);
+            }
+        }
+        public double Area(IList<int> args) => Area(args.ToArray());
         /// <summary>
         /// Método que usa el Id para saber que geometria se usa.
         /// </summary>
@@ -47,28 +62,28 @@ namespace Geometria
 
             switch (Id)
             {
-                case 1:
+                case CUADRADO:
                     result = AreaCuadrado(args[0]);
                     break;
-                case 2:
+                case CIRCULO:
                     result = AreaCirculo(args[0]);
                     break;
-                case 3:
+                case TRIANGULO:
                     result = AreaTriangulo(args[0], args[1]);
                     break;
-                case 4:
+                case RECTANGULO:
                     result = AreaRectangulo(args[0], args[1]);
                     break;
-                case 5:
+                case PENTAGONO:
                     result = AreaPentagono(args[0], args[1]);
                     break;
-                case 6:
+                case ROMBO:
                     result = AreaRombo(args[0], args[1]);
                     break;
-                case 7:
+                case ROMBOIDE:
                     result = AreaRomboide(args[0], args[1]);
                     break;
-                case 8:
+                case TRAPECIO:
                     result = AreaTrapecio(args[0], args[1], args[2]);
                     break;
                 default:
@@ -97,76 +112,76 @@ namespace Geometria
             return lado * lado;
         }
         //metodo area del circulo
-        public static double AreaCirculo(int r)
+        public static double AreaCirculo(int radio)
         {
-            return Math.PI * Math.Pow(r, 2);
+            return Math.PI * Math.Pow(radio, 2);
         }
 
         //metodo area del triangulo
         public static double AreaTriangulo(int longitudBase, int altura)
         {
-            return (longitudBase * altura) / 2.0;
+            return longitudBase * altura / 2.0;
         }
 
         //metodo area del rectangulo
-        public static int AreaRectangulo(int b, int h)
+        public static int AreaRectangulo(int ancho, int alto)
         {
-            return b * h;
+            return ancho * alto;
         }
 
         //metodo area del rectangulo
-        public static double AreaPentagono(int p, int a)
+        public static double AreaPentagono(int perimetro, int apotema)
         {
-            return (p * a) / 2.0;
+            return perimetro * apotema / 2.0;
         }
 
         //metodo area del rectangulo
         public static double AreaRombo(int diagonalMayor, int diagonalMenor)
         {
-            return (diagonalMayor * diagonalMenor) / 2.0;
+            return diagonalMayor * diagonalMenor/ 2.0;
         }
 
         //metodo area del rectangulo
-        public static int AreaRomboide(int b, int h)
+        public static int AreaRomboide(int longitudBase, int altura)
         {
-            return b * h;
+            return longitudBase * altura;
         }
 
         //metodo area del rectangulo
-        public static double AreaTrapecio(int baseMayor, int baseMenor, int h)
+        public static double AreaTrapecio(int baseMayor, int baseMenor, int altura)
         {
-            return ((baseMayor + baseMenor) / 2.0) * h;
+            return (baseMayor + baseMenor / 2.0) * altura;
         }
         #endregion
 
-        public static String GetNameFigura(int fiCode)
+        public static string GetNameFigura(int fiCode)
         {
-            String figura;
+            string figura;
 
             switch (fiCode)
             {
-                case 1:
+                case CUADRADO:
                     figura = "Cuadrado";
                     break;
-                case 2:
+                case CIRCULO:
                     figura = "Circulo";
                     break;
-                case 3:
+                case TRIANGULO:
                     figura = "Triangulo";
                     break;
-                case 4:
+                case RECTANGULO:
                     figura = "Rectangulo";
                     break;
-                case 5:
+                case PENTAGONO:
                     figura = "Pentagono";
                     break;
-                case 6:
+                case ROMBO:
                     figura = "Rombo";
                     break;
-                case 7:
+                case ROMBOIDE:
                     figura = "Romboide";
                     break;
-                case 8:
+                case TRAPECIO:
                     figura = "Trapecio";
                     break;
                 default:

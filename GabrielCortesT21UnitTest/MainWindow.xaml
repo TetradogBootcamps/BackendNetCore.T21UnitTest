@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GabrielCortesT21UnitTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="T21 Unit Test" Height="450" Width="800">
+    <TabControl x:Name="tbMain" />
 
-    </Grid>
+
 </Window>
