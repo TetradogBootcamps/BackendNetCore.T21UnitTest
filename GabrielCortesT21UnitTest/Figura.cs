@@ -34,7 +34,7 @@ namespace Geometria
                 else id = value; 
             }
         }
-        public string Nom => ToString();
+        public string Nom => GetNameFigura(Id);
 
         /// <summary>
         /// Método que usa el Id para saber que geometria se usa.
@@ -78,62 +78,67 @@ namespace Geometria
             return result;
         }
 
-        //Métodos propios de clase Geometria
-        //metodo area del cuadrado
-        public int AreaCuadrado(int lado)
-        {
-            return lado * lado;
-        }
 
-        //metodo area del circulo
-        public double AreaCirculo(int r)
-        {
-            return Math.PI * Math.Pow(r, 2);
-        }
 
-        //metodo area del triangulo
-        public double AreaTriangulo(int longitudBase, int altura)
-        {
-            return (longitudBase * altura) / 2.0;
-        }
-
-        //metodo area del rectangulo
-        public int AreaRectangulo(int b, int h)
-        {
-            return b * h;
-        }
-
-        //metodo area del rectangulo
-        public double AreaPentagono(int p, int a)
-        {
-            return (p * a) / 2.0;
-        }
-
-        //metodo area del rectangulo
-        public double AreaRombo(int diagonalMayor, int diagonalMenor)
-        {
-            return (diagonalMayor * diagonalMenor) / 2.0;
-        }
-
-        //metodo area del rectangulo
-        public int AreaRomboide(int b, int h)
-        {
-            return b * h;
-        }
-
-        //metodo area del rectangulo
-        public double AreaTrapecio(int baseMayor, int baseMenor, int h)
-        {
-            return ((baseMayor + baseMenor) / 2.0) * h;
-        }
-
+      
         //Selector de figuras
 
 
         public override string ToString()
         {
-            return GetNameFigura(Id);
+            return Nom;
         }
+
+        #region Metodos Area
+        //Métodos propios de clase Geometria
+        //metodo area del cuadrado
+        public static int AreaCuadrado(int lado)
+        {
+            return lado * lado;
+        }
+        //metodo area del circulo
+        public static double AreaCirculo(int r)
+        {
+            return Math.PI * Math.Pow(r, 2);
+        }
+
+        //metodo area del triangulo
+        public static double AreaTriangulo(int longitudBase, int altura)
+        {
+            return (longitudBase * altura) / 2.0;
+        }
+
+        //metodo area del rectangulo
+        public static int AreaRectangulo(int b, int h)
+        {
+            return b * h;
+        }
+
+        //metodo area del rectangulo
+        public static double AreaPentagono(int p, int a)
+        {
+            return (p * a) / 2.0;
+        }
+
+        //metodo area del rectangulo
+        public static double AreaRombo(int diagonalMayor, int diagonalMenor)
+        {
+            return (diagonalMayor * diagonalMenor) / 2.0;
+        }
+
+        //metodo area del rectangulo
+        public static int AreaRomboide(int b, int h)
+        {
+            return b * h;
+        }
+
+        //metodo area del rectangulo
+        public static double AreaTrapecio(int baseMayor, int baseMenor, int h)
+        {
+            return ((baseMayor + baseMenor) / 2.0) * h;
+        }
+        #endregion
+
         public static String GetNameFigura(int fiCode)
         {
             String figura;

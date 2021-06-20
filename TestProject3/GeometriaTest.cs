@@ -5,12 +5,12 @@ using Geometria;
 
 namespace GabrielCortesT21Testing
 {
-    [TestClass()]
+    [TestClass]
     public class FiguraTest
     {
-        [TestMethod()]
+        [TestMethod]
         public void TestAreaCuadrado() => TestAreaFiguraGenerico(Figura.CUADRADO, 100.0, 10);
-        [TestMethod()]
+        [TestMethod]
         public void TestAreaCirculo() => TestAreaFiguraGenerico(Figura.CIRCULO, 12.566, 2);
         void TestAreaFiguraGenerico(int figuraId, double result, params int[] args)
         {
