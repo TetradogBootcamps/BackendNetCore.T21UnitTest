@@ -84,6 +84,7 @@ namespace GabrielCortesT21UnitTest
         private void Calcular(object sender, RoutedEventArgs e)
         {
             const int SINVALOR = 0;
+
             string strNum;
             StackPanel stkParam;
             StackPanel stkButton = (sender as Button).Parent as StackPanel;
