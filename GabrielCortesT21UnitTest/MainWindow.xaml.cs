@@ -23,7 +23,7 @@ namespace GabrielCortesT21UnitTest
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {//lo hago así para aprender más
+        {//así es dinamico :)
 
             TabItem tbFigura;
             Figura figura;
@@ -43,10 +43,25 @@ namespace GabrielCortesT21UnitTest
                 tbFigura.Tag = figura;
                 stkParametros = new StackPanel();
                 tbFigura.Content = stkParametros;
+
+
+
+                stkParametro = new StackPanel() { Tag = false };
+
+                btnCalcular = new Button() { Content = "Calcular Area" };
+
+                btnCalcular.Click += Calcular;
+                lblParametro = new Label() { Height=50};
+                stkParametro.Children.Add(btnCalcular);
+                stkParametro.Children.Add(lblParametro);
+
+                stkParametros.Children.Add(stkParametro);
+
+
                 foreach (string parametro in figura.Args)
                 {
                     //lbl:txtBox
-                    stkParametro = new StackPanel() { Tag = true , Orientation = Orientation.Horizontal };
+                    stkParametro = new StackPanel() { Tag = true, Orientation = Orientation.Horizontal };
 
                     lblParametro = new Label() { Content = $"{parametro}:", Width = 100 };
                     txtParametro = new TextBox() { Width = 50 };
@@ -58,16 +73,7 @@ namespace GabrielCortesT21UnitTest
                     stkParametros.Children.Add(stkParametro);
 
                 }
-                stkParametro = new StackPanel() { Tag = false };
 
-                btnCalcular = new Button() { Content = "Calcular Area" };
-
-                btnCalcular.Click += Calcular;
-                lblParametro = new Label();
-                stkParametro.Children.Add(btnCalcular);
-                stkParametro.Children.Add(lblParametro);
-
-                stkParametros.Children.Add(stkParametro);
 
                 tbMain.Items.Add(tbFigura);
             }
@@ -77,6 +83,8 @@ namespace GabrielCortesT21UnitTest
 
         private void Calcular(object sender, RoutedEventArgs e)
         {
+            const int SINVALOR = 0;
+            string strNum;
             StackPanel stkParam;
             StackPanel stkButton = (sender as Button).Parent as StackPanel;
             StackPanel stkParentParentBtn = stkButton.Parent as StackPanel;
@@ -88,7 +96,10 @@ namespace GabrielCortesT21UnitTest
                 stkParam = item as StackPanel;
                 if ((bool)stkParam.Tag)
                 {
-                    args.Add(int.Parse((stkParam.Children[1] as TextBox).Text));
+                    strNum = (stkParam.Children[1] as TextBox).Text;
+                    if (!string.IsNullOrEmpty(strNum))
+                        args.Add(int.Parse(strNum));
+                    else args.Add(SINVALOR);
                 }
             }
             (stkButton.Children[1] as Label).Content = $"Result: {figura.Area(args)}";

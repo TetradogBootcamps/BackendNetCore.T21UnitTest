@@ -25,17 +25,17 @@ namespace Geometria
 
 
         //Constructores
-        public Figura(int id=DEFAULT)=> Id = id;
+        public Figura(int id)=> Id = id;
 
 
 
         public int Id { 
             get => id; 
-            set { 
+            set {
 
-                if (value < PRIMERO || value>ULTIMO)
-                    id = DEFAULT;
-                
+                if (value < PRIMERO || value > ULTIMO)
+                    throw new ArgumentOutOfRangeException();
+
                 else id = value; 
             }
         }
@@ -185,8 +185,7 @@ namespace Geometria
                     figura = "Trapecio";
                     break;
                 default:
-                    figura = "Default";
-                    break;
+                    throw new ArgumentOutOfRangeException(nameof(fiCode));
             }
             return figura;
 
